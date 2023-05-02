@@ -2,14 +2,16 @@ from Snake import Snake
 
 class Game():
     def __init__(self) -> None:
-        self.grid_height = 80
-        self.grid_width = 80
+        self.grid_height = 40
+        self.grid_width = 40
         self.initial_snake_size = 5
         self.grid: list[list[Tile]] = []
+
         for x in range(self.grid_width):
             self.grid.append([])
             for y in range(self.grid_height):
                 self.grid[x].append(Tile((50, 50, 50)))
+
         self.snake = Snake(
             (int(self.grid_width/2),int(self.grid_height/2)),self.initial_snake_size
         )
@@ -20,11 +22,13 @@ class Game():
 
     def update_snake(self) -> None:
         for snakeTile in self.snake.body:
-            if(snakeTile == self.snake.head):
+            if snakeTile == self.snake.head:
                 self.grid[snakeTile[0]][snakeTile[1]] = SnakePiece(True)
+            elif snakeTile == self.snake.tail:
+                self.grid[snakeTile[0]][snakeTile[1]] = Tile((50, 50, 50))
             else:
                 self.grid[snakeTile[0]][snakeTile[1]] = SnakePiece()
-            print(self.grid[snakeTile[0]][snakeTile[1]].color)
+            
         
     
 

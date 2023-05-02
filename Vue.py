@@ -14,17 +14,16 @@ class Vue():
         
 
     def load_play_area(self, game: Game) -> None:
-
         self.tile_width = self.play_area_size / game.grid_width
         self.tile_height = self.play_area_size / game.grid_height
         for x in range(game.grid_width):
             for y in range(game.grid_height):
                 pygame.draw.rect(
                     self.screen, game.grid[x][y].color , pygame.Rect(
-                        (self.tile_width*(x-1)),
-                        self.HUD_height + (self.tile_height*(game.grid_height-y-1)),
                         (self.tile_width*x),
-                        self.HUD_height + (self.tile_height*(game.grid_height-y)),
+                        self.HUD_height + (self.tile_height*(game.grid_height - y)),
+                        self.tile_width,
+                        self.tile_height,
                     )
                 )
     

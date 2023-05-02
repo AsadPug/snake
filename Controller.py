@@ -19,7 +19,7 @@ class Controller():
         self.game.tick()
         self.vue.tick(self.game)
         pygame.display.update()
-        self.clock.tick(60)
+        self.clock.tick(1)
         self.tick()
 
     def quit(self) -> None:
