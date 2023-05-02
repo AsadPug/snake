@@ -4,12 +4,13 @@ import pygame
 
 class Vue():
     def __init__(self):
-        self.screen_width = 800
-        self.screen_height = 1000
-        self.play_area_size = 800
+        self.screen_width = 400
+        self.screen_height = 600
+        self.play_area_size = 400
         self.screen = pygame.display.set_mode(
             (self.screen_width,self.screen_height)
         )
+    
         self.HUD_height =  self.screen_height - self.play_area_size
         
 

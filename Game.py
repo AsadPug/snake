@@ -16,6 +16,15 @@ class Game():
             (int(self.grid_width/2),int(self.grid_height/2)),self.initial_snake_size
         )
         
+    def is_game_over(self) -> bool: 
+        if (self.snake.head[0] < 0 or self.snake.head[1] < 0
+            or self.snake.head[0] >= self.grid_width 
+            or self.snake.head[1] >= self.grid_height):
+            is_game_over = True
+        else:
+            is_game_over = False
+        return is_game_over
+    
     def tick(self) -> None: 
         self.snake.tick()
         self.update_snake()
