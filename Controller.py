@@ -10,7 +10,7 @@ class Controller():
         self.vue = Vue()
         self.clock = pygame.time.Clock()
         self.game = Game()
-        self.speed = 1
+        self.speed = 3
         self.game_loop()
     
     def game_loop(self) -> None:
@@ -18,10 +18,11 @@ class Controller():
             self.tick()
     
     def tick(self):
+        keydown_event_done = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.quit()
-            if event.type == pygame.KEYDOWN:
+            if event.type == pygame.KEYDOWN and keydown_event_done is False:
                 if event.key == pygame.K_UP or event.key == pygame.K_w:
                     self.game.snake.change_direction(Direction.UP)
                 if event.key == pygame.K_DOWN or event.key == pygame.K_s:
@@ -30,12 +31,12 @@ class Controller():
                     self.game.snake.change_direction(Direction.LEFT)
                 if event.key == pygame.K_RIGHT or event.key == pygame.K_d:
                     self.game.snake.change_direction(Direction.RIGHT)
+                keydown_event_done = True
         
         self.game.tick()
         self.vue.tick(self.game)
         pygame.display.update()
         self.clock.tick(self.speed)
-        self.speed += 1
 
     def quit(self) -> None:
         pygame.quit()

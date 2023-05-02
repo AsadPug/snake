@@ -22,7 +22,15 @@ class Snake():
             or (self.direction == Direction.RIGHT and direction != Direction.LEFT)
             or (self.direction == Direction.LEFT and direction != Direction.RIGHT)):
             self.direction = direction
- 
+
+    def is_snake_looped(self) -> bool:
+        looped = False
+        for i in range (1,len(self.body)):
+            if(self.body[i] == self.head):
+                looped = True
+        return looped
+            
+        
     def tick(self) -> None:
         if self.direction == Direction.DOWN:
             self.head = (self.head[0],self.head[1]-1)
