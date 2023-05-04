@@ -13,6 +13,7 @@ class Snake():
         self.tail: tuple[int, int] = (self.head[0],self.head[1]-initial_size)
         self.direction = Direction.UP 
         self.body: list[tuple[int, int]] = []
+        self.size = initial_size
         for i in range(initial_size+1):
             self.body.append((self.head[0],self.head[1]-i))
         
@@ -23,15 +24,16 @@ class Snake():
             or (self.direction == Direction.LEFT and direction != Direction.RIGHT)):
             self.direction = direction
 
+
     def is_snake_looped(self) -> bool:
         looped = False
-        for i in range (1,len(self.body)):
+        for i in range (1,len(self.body)-1):
             if(self.body[i] == self.head):
                 looped = True
         return looped
             
         
-    def tick(self) -> None:
+    def tick(self, is_growing: bool) -> None:
         if self.direction == Direction.DOWN:
             self.head = (self.head[0],self.head[1]-1)
         elif self.direction == Direction.UP:
@@ -41,9 +43,13 @@ class Snake():
         elif self.direction == Direction.LEFT:
             self.head = (self.head[0]-1,self.head[1])
         self.body.insert(0,(self.head[0],self.head[1]))
-        self.tail = self.body[len(self.body)-2]
-        self.body.pop()
-    
+
+        if is_growing is False:        
+            self.body.pop()
+            self.tail = self.body[len(self.body)-1]
+        elif is_growing is True:
+            self.size+=1
+
    
         
 
